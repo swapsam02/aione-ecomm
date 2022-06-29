@@ -1,77 +1,75 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{ config('app.name') }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+        <meta content="Coderthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{{ asset('dashboard/dist/assets/images/favicon.ico') }}">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+        <!-- third party css -->
+        <link href="{{ asset('dashboard/dist/assets/libs/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('dashboard/dist/assets/libs/datatables/responsive.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+        <!-- third party css end -->
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+        <!-- App css -->
+        <link href="{{ asset('dashboard/dist/assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('dashboard/dist/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('dashboard/dist/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    </head>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <body>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <!-- Begin page -->
+        <div id="wrapper">
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+            <!-- Topbar Start -->
+            @include('admin.elements.header')
+            <!-- end Topbar -->
 
-                    </ul>
+            <!-- ========== Left Sidebar Start ========== -->
+            @include('admin.elements.sidebar')
+            <!-- Left Sidebar End -->
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Admin Login') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('admin.logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+            <div class="content-page">
+                <!-- content -->
+                @yield('content')
+                <!-- Footer Start -->
+                @include('admin.elements.footer')
+                <!-- end Footer -->
             </div>
-        </nav>
+        </div>
+        <!-- END wrapper -->
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
-</body>
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <!-- Vendor js -->
+        <script src="{{ asset('dashboard/dist/assets/js/vendor.min.js') }}"></script>
+
+        <!-- Third Party js-->
+        <script src="{{ asset('dashboard/dist/assets/libs/jquery-knob/jquery.knob.min.js') }}"></script>
+        <script src="{{ asset('dashboard/dist/assets/libs/peity/jquery.peity.min.js') }}"></script>
+        <script src="{{ asset('dashboard/dist/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+        <script src="{{ asset('dashboard/dist/assets/libs/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('dashboard/dist/assets/libs/datatables/dataTables.bootstrap4.js') }}"></script>
+        <script src="{{ asset('dashboard/dist/assets/libs/datatables/dataTables.responsive.min.js') }}"></script>
+        <script src="{{ asset('dashboard/dist/assets/libs/datatables/responsive.bootstrap4.min.js') }}"></script>
+        <!-- third party js ends -->
+
+        <!-- Dashboard init -->
+        <script src="{{ asset('dashboard/dist/assets/js/pages/dashboard-2.init.js') }}"></script>
+
+        <!-- App js -->
+        <script src="{{ asset('dashboard/dist/assets/js/app.min.js') }}"></script>
+        
+    </body>
 </html>
